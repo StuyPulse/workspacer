@@ -6,6 +6,8 @@
 #include <unistd.h>
 
 #define USERS_PATH "/home/wilson/694/workspacing/users.csv"
+#define USERS_WORK "/home/wilson/694/workspacing/their-work"
+#define INIT_WORKSPACE_CMD "/home/wilson/694/workspacing/init-workspace.sh "
 
 int startsWith(char* big, char* little) {
     int i;
@@ -109,17 +111,17 @@ void prompt(char* p, char* buf) {
 
 void promptLoggedInInterface(char* uname) {
     printf("Welcome, %s! What would you like me to do?\n", uname);
-    printf("Type w and I'll set up/restore your workspace\n");
+    printf("Type r and I'll restore your workspace\n");
     printf("Type s and I'll save your work\n");
     char action;
     while (1) {
         action = getchar();
-        if (action == 'w') {
+        if (action == 'r') {
             break;
         } else if (action == 's') {
             break;
         } else {
-            printf("Please enter either w or s\n");
+            printf("Please enter either r or s\n");
         }
     }
 }
@@ -164,6 +166,28 @@ void saveNewUser(char* uname, char* passHash) {
     fclose(file);
 }
 
+#define WORKSPACE_PATH "/edu-workspace"
+void initUserWorkspace(char* uname) {
+    char cwd[100];
+    getcwd(cwd, 100);
+
+    // Directory in their home directory in which they'll work
+    char workspacedir[100];
+    sprintf(workspacedir, "%s%s", cwd, WORKSPACE_PATH);
+
+    // Directory in 'their-work' folder here
+    char worksavedir[100];
+    sprintf(worksavedir, "%s/%s", USERS_WORK, uname);
+
+    char command[200] = INIT_WORKSPACE_CMD;
+    sprintf(command, "%s %s", INIT_WORKSPACE_CMD, workspacedir);
+
+    printf("workspacedir: %s\n", workspacedir);
+    printf("Command about to run:%s\n", command);
+
+    system(command);
+}
+
 void promptNewUser() {
     char uname[100];
     prompt("Username for new user: ", uname);
@@ -188,7 +212,7 @@ void promptNewUser() {
     sha1HexSum(pass1, passHash);
     saveNewUser(uname, passHash);
 
-    promptLoggedInInterface(uname);
+    initUserWorkspace(uname);
 }
 
 void promptInterface() {
