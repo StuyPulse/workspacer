@@ -2,8 +2,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include <sys/types.h>
+#include <ctype.h>
 #include <unistd.h>
-#include <openssl/sha.h>
 
 #define USERS_PATH "/home/wilson/694/workspacing/users.csv"
 
@@ -21,24 +21,53 @@ int startsWith(char* big, char* little) {
     return 1;
 }
 
-int cutAfter(char* big, char* little, int offset, char* restBuf) {
+/* returns 0 for success, -1 for no comma on line */
+int getLineHashEntry(char* line, char* hashBuf) {
     int i;
-    for (i = 0; little[i]; i++) {
-        if (!big[i]) {
-            /* We've reached the end of big, but little goes on */
-            return 0;
+    for (i = 0; 1; i++) {
+        if (line[i] == '\0' || line[i] == '\n') {
+            return -1;
         }
-        if (big[i] != little[i]) {
-            return 0;
+        if (line[i] == ',') {
+            i++; // Jump over it
+            break;
         }
     }
-    i += offset; // in practice, we use this to jump past comma
-    int j;
-    for (j = 0; big[j + i] != '\0' && big[j + i] != '\n'; j++) {
-        restBuf[j] = big[j + i];
+    // Copy the hash to hashBuf
+    int hashBufIndex = 0;
+    while (1) {
+        if (line[i] == '\0' || isspace(line[i])) {
+            hashBuf[hashBufIndex] = '\0';
+            break;
+        }
+        hashBuf[hashBufIndex] = line[i];
+        i++;
+        hashBufIndex++;
     }
-    restBuf[j + i] = big[j + i]; // copy \0
-    return 1;
+    return 0;
+}
+
+/* Uses /usr/bin/sha1sum rather than openssl/sha library because
+ * we can't be sure about the libraries installed on the school
+ * desktops */
+void sha1HexSum(char* pass, char* hashBuf) {
+    char command[150];
+    sprintf(command, "echo \"%s\" | /usr/bin/sha1sum", pass);
+    FILE *fp;
+    fp = popen(command, "r");
+
+    // Read just the hexadecimal sum from the output
+    int i = 0;
+    char c;
+    while (1) {
+        c = (char) fgetc(fp);
+        if (isspace(c)) {
+            hashBuf[i] = '\0';
+            break;
+        }
+        hashBuf[i] = c;
+        i++;
+    }
 }
 
 int userExists(char* uname) {
@@ -63,8 +92,8 @@ int getUserPass(char* uname, char* passBuf) {
     file = fopen(USERS_PATH, "r");
     char line[201];
     while (fgets(line, 201, file)) {
-        if (cutAfter(line, uname, 1, passBuf)) {
-            printf("passBuf: %s\n", passBuf);
+        if (startsWith(line, uname)) {
+            getLineHashEntry(line, passBuf);
             fclose(file);
             return 0;
         }
@@ -76,7 +105,6 @@ int getUserPass(char* uname, char* passBuf) {
 void prompt(char* p, char* buf) {
     printf("%s", p);
     scanf("%s", buf);
-    printf("\n");
 }
 
 void promptLoggedInInterface(char* uname) {
@@ -101,20 +129,23 @@ void promptLogin() {
     prompt("Username: ", uname);
     char pass[100];
     prompt("Password: ", pass); // TODO: HIDE PASSWORD INPUT
-    char expectedPass[100];
-    getUserPass(uname, expectedPass);
+    char passHash[100];
+    sha1HexSum(pass, passHash);
+
+    char expectedPassHash[100];
+    getUserPass(uname, expectedPassHash);
 
     /* strcmp(s0, s1) is 0 when they are identical */
-    if (strcmp(pass, expectedPass) == 0) {
+    if (strcmp(passHash, expectedPassHash) == 0) {
         promptLoggedInInterface(uname);
     } else {
-        printf("Username and password did not match :/. Try again.");
+        printf("Username and password did not match :/. Try again.\n");
         promptLogin();
     }
 }
 
-void saveNewUser(char* uname, char* pass) {
-    /* Create the line <uname>,<pass> to be put in the file: */
+void saveNewUser(char* uname, char* passHash) {
+    /* Create the line <uname>,<passHash> to be put in the file: */
     char line[202];
     int i;
     for (i = 0; uname[i]; i++) {
@@ -122,9 +153,8 @@ void saveNewUser(char* uname, char* pass) {
     }
     int unameLen = i; // excludes \0
     line[unameLen] = ',';
-    // TODO: HASH
-    for (i = 0; pass[i]; i++) {
-        line[unameLen + 1 + i] = pass[i];
+    for (i = 0; passHash[i]; i++) {
+        line[unameLen + 1 + i] = passHash[i];
     }
     line[unameLen + 1 + i] = '\n';
     line[unameLen + 2 + i] = '\0';
@@ -154,7 +184,9 @@ void promptNewUser() {
         }
     }
     // Passwords matched
-    saveNewUser(uname, pass1);
+    char passHash[100];
+    sha1HexSum(pass1, passHash);
+    saveNewUser(uname, passHash);
 }
 
 void promptInterface() {
@@ -162,9 +194,10 @@ void promptInterface() {
     printf("Hitting Ctrl-C at any point will exit the program.\n");
     printf("\n");
     printf("Type n to make a new user, or l to login to an existing one: ");
-    char c = (char) getchar();
     printf("\n");
+    char c;
     while (1) {
+        c = (char) getchar();
         if (c == 'n') {
             promptNewUser();
             break;
@@ -179,6 +212,8 @@ void promptInterface() {
 
 int main() {
     printf("euid: %d; uid: %d\n", geteuid(), getuid());
+    /* TODO: use precise length for buffers holding a sha1 digest, rather
+     * than length 100 arbitrarily */
     promptInterface();
     return 0;
 }
