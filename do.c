@@ -187,6 +187,8 @@ void promptNewUser() {
     char passHash[100];
     sha1HexSum(pass1, passHash);
     saveNewUser(uname, passHash);
+
+    promptLoggedInInterface(uname);
 }
 
 void promptInterface() {
