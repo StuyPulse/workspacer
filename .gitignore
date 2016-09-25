@@ -1,3 +1,7 @@
 *.class
 a.out
+*.o
+
 users.csv
+their-work/
+*.jar

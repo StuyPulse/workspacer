@@ -3,5 +3,7 @@ chmod +xs /tmp/launch.o
 
 gcc interface.c -o interface.o
 
+touch users.csv
+
 mkdir their-work
 chmod a+rwxt their-work/
