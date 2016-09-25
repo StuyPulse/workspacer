@@ -1,5 +1,5 @@
 To setup:
-- put gui.jar (see Team694/java-education.git) in ./gui.jar
+- put gui.jar (see github.com/Team694/java-education.git) in ./gui.jar
 
 - run `make setup`.
 
@@ -11,6 +11,6 @@ Notes for developers:
   Executables respect the SUID bit, but scripts do not.  This means `launch.o`
   and `interface.o` run with euid (effective user-id) of the file owner, but
   when they call shell scripts, those shell scripts run with the euid of the
-  *original* caller. Those scripts can interact with `their-work/` only because
+  *original* caller. Those scripts can write to `their-work/` only because
   `their-work/` has the same permissions as `/tmp` (rwx-able by all, with the
   sticky bit set).
