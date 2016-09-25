@@ -1,9 +1,7 @@
+To setup:
+
 - put gui.jar (see Team694/java-education.git) in ./gui.jar
 
-- compile and run ./totmp to get the binary into tmp. For some
-  reason, when the binary is run at /home/wilson/workspacing/a.out
-  the euid isn't set, but it is when run from /tmp/java-eduaction.out
-
-- the files must be in a directory publicly readable and executable
-
-- Run `mkdir their-work`
+- run `./setup.sh`. This compiles, makes `/tmp/launch.o` (with SUID
+  permission) which users will run, and creates the `/tmp`-esque
+  `their-work/` directory, which will store users' work.

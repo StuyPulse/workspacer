@@ -11,10 +11,10 @@ if [ -z $2 ]; then
 fi
 
 # Clean their-work/<uname> directory
-rm -rf /home/wilson/workspacing/their-work/$2/
+rm -rf ./their-work/$2/
 
 # Repopulate it with updated work
-cp -r $1 /home/wilson/workspacing/their-work/$2
+cp -r $1 ./their-work/$2
 
 # gui.jar doesn't need to be saved for each user
-rm /home/wilson/workspacing/their-work/$2/lib/gui.jar
+rm ./their-work/$2/lib/gui.jar

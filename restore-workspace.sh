@@ -16,8 +16,8 @@ if [ -d $1 ]; then
     exit 1
 fi
 
-cp -r /home/wilson/workspacing/their-work/$2 $1
+cp -r ./their-work/$2 $1
 
 mkdir -p $1/lib
 
-cp /home/wilson/workspacing/gui.jar $1/lib/gui.jar
+cp ./gui.jar $1/lib/gui.jar

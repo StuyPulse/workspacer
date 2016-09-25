@@ -7,8 +7,8 @@ if [ -z $2 ]; then
     exit 1
 fi
 
-cp -r /home/wilson/workspacing/workspace-template $1
-cp -r /home/wilson/workspacing/workspace-template /home/wilson/workspacing/their-work/$2
+cp -r ./workspace-template $1
+cp -r ./workspace-template ./their-work/$2
 
 mkdir $1/lib
-cp /home/wilson/workspacing/gui.jar $1/lib/gui.jar
+cp ./gui.jar $1/lib/gui.jar
