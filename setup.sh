@@ -1,4 +1,5 @@
-gcc launch.c -o /tmp/launch.o
+gcc launch.c -o launch.o
+cp launch.o /tmp/launch.o
 chmod +xs /tmp/launch.o
 
 gcc interface.c -o interface.o
