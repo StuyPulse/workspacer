@@ -1,7 +1,0 @@
-To setup:
-
-- put gui.jar (see Team694/java-education.git) in ./gui.jar
-
-- run `./setup.sh`. This compiles, makes `/tmp/launch.o` (with SUID
-  permission) which users will run, and creates the `/tmp`-esque
-  `their-work/` directory, which will store users' work.

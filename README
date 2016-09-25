@@ -1,0 +1,7 @@
+To setup:
+
+- put gui.jar (see Team694/java-education.git) in ./gui.jar
+
+- run `./setup.sh`
+
+After this, users can run `/tmp/launch.o` to login or create a user.
