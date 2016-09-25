@@ -114,7 +114,10 @@ void runWorkspaceShellScript(char* userwd, char* scriptdir, char* uname) {
 
     char command[200];
     sprintf(command, "%s %s %s", scriptdir, workspacedir, uname);
-    printf("%s %s %s", scriptdir, workspacedir, uname);
+
+    // TODO: remove this before the newbies start working
+    printf("%s %s %s\n", scriptdir, workspacedir, uname);
+
     system(command);
 }
 
