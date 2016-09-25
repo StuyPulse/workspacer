@@ -15,3 +15,6 @@ rm -rf /home/wilson/workspacing/their-work/$2/
 
 # Repopulate it with updated work
 cp -r $1 /home/wilson/workspacing/their-work/$2
+
+# gui.jar doesn't need to be saved for each user
+rm /home/wilson/workspacing/their-work/$2/lib/gui.jar
