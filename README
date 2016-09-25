@@ -1,7 +1,16 @@
 To setup:
-
 - put gui.jar (see Team694/java-education.git) in ./gui.jar
 
 - run `./setup.sh`
 
 After this, users can run `/tmp/launch.o` to login or create a user.
+
+
+Notes for developers:
+- Executables respect the SUID (set user-id) bit, but scripts do not.
+  `/tmp/launch.o` has the SUID bit set by `setup.sh`. This means `launch.o` and
+  `interface.o` run with euid (effective user-id) of the file owner, but when
+  they call shell scripts, those shell scripts run with the euid of the
+  *original* caller. Those scripts can interact with `their-work/` only because
+  `their-work/` has the same permissions as `/tmp` (rwx-able by all, with the
+  sticky bit set).
