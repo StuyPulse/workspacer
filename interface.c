@@ -240,8 +240,8 @@ int main(int argc, char *argv[]) {
     }
     char cwd[200];
     getcwd(cwd, 200);
-    if (strcmp(cwd, "/home/wilson/workspacing") != 0) {
-        printf("Run this only in /home/wilson/workspacing");
+    if (strcmp(cwd, "/home/wilson/workspacer") != 0) {
+        printf("Run this only in /home/wilson/workspacer");
         return 2;
     }
     /* TODO: use precise length for buffers holding a sha1 digest, rather

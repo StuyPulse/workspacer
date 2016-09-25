@@ -11,7 +11,7 @@
 int main() {
     char path[200];
     getcwd(path, 200);
-    int status = chdir("/home/wilson/workspacing");
+    int status = chdir("/home/wilson/workspacer");
     if (status != 0) {
         printf("chdir failed. status: %d\n", status);
         printf("original cwd: %s\n", path);
