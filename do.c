@@ -79,7 +79,7 @@ int userExists(char* uname) {
     file = fopen(USERS_PATH, "r");
     char line[201];
     while (fgets(line, 201, file)) {
-        if (startsWith(line, uname)) {
+        if (startsWith(line, uname) && line[strlen(uname)] == ',') {
             fclose(file);
             return 1;
         }
@@ -96,7 +96,7 @@ int getUserPass(char* uname, char* passBuf) {
     file = fopen(USERS_PATH, "r");
     char line[201];
     while (fgets(line, 201, file)) {
-        if (startsWith(line, uname)) {
+        if (startsWith(line, uname) && line[strlen(uname)] == ',') {
             getLineHashEntry(line, passBuf);
             fclose(file);
             return 0;
