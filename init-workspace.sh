@@ -10,5 +10,6 @@ fi
 cp -r ./workspace-template $1
 cp -r ./workspace-template ./their-work/$2
 
-mkdir $1/lib
-cp ./gui.jar $1/lib/gui.jar
+#mkdir $1/lib
+#cp ./gui.jar $1/lib/gui.jar
+ln -s /tmp/je-lib $1/lib
