@@ -8,6 +8,7 @@ setup: compile restore-tmp
 restore-tmp:
 	cp launch.o /tmp/launch.o
 	chmod +xs /tmp/launch.o
+	rm -rf /tmp/je-lib/
 	cp -r lib/ /tmp/je-lib/
 	chmod a+rx /tmp/je-lib
 
