@@ -5,13 +5,8 @@ setup: compile restore-tmp
 	mkdir their-work
 	chmod a+rwxt their-work/
 
-restore-tmp:
-	cp launch.o /tmp/launch.o
-	chmod +xs /tmp/launch.o
-	rm -rf /tmp/je-lib/
-	cp -r lib/ /tmp/je-lib/
-	chmod a+rx /tmp/je-lib
-
 compile:
 	gcc launch.c -o launch.o
 	gcc interface.c -o interface.o
+	chmod +xs ./launch.o
+	chmod a+rx ./lib

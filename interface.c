@@ -113,7 +113,7 @@ void runWorkspaceShellScript(char* userwd, char* scriptdir, char* uname) {
     sprintf(workspacedir, "%s%s", userwd, WORKSPACE_PATH);
 
     char command[200];
-    sprintf(command, "%s %s %s", scriptdir, workspacedir, uname);
+    sprintf(command, "bash %s %s %s", scriptdir, workspacedir, uname);
 
     // TODO: remove this before the newbies start working
     printf("%s %s %s\n", scriptdir, workspacedir, uname);
@@ -235,6 +235,7 @@ void promptInterface(char* userwd) {
     }
 }
 
+#define EXPECTED_DIR "/var/tmp/workspacer"
 int main(int argc, char *argv[]) {
     printf("euid: %d; uid: %d\n", geteuid(), getuid());
     if (argc != 2) {
@@ -243,8 +244,8 @@ int main(int argc, char *argv[]) {
     }
     char cwd[200];
     getcwd(cwd, 200);
-    if (strcmp(cwd, "/home/wilson/workspacer") != 0) {
-        printf("Run this only in /home/wilson/workspacer");
+    if (strcmp(cwd, EXPECTED_DIR) != 0) {
+        printf("Run this only in %s\n", EXPECTED_DIR);
         return 2;
     }
     /* TODO: use precise length for buffers holding a sha1 digest, rather

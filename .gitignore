@@ -1,6 +1,7 @@
 *.class
 a.out
 *.o
+lib/
 
 users.csv
 their-work/

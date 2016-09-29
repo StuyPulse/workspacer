@@ -18,6 +18,4 @@ fi
 
 cp -r ./their-work/$2 $1
 
-mkdir -p $1/lib
-
-cp ./gui.jar $1/lib/gui.jar
+ln -s /var/tmp/workspacer/lib $1/lib
