@@ -1,6 +1,6 @@
 .DEFAULT_GOAL = compile
 
-setup: compile restore-tmp
+setup: compile
 	touch users.csv
 	mkdir their-work
 	chmod a+rwxt their-work/

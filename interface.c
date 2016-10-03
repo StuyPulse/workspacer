@@ -6,10 +6,11 @@
 #include <unistd.h>
 
 #define USERS_PATH "./users.csv"
-#define USERS_WORK "./their-work"
-#define INIT_WORKSPACE_CMD "./init-workspace.sh"
-#define RESTORE_WORKSPACE_CMD "./restore-workspace.sh"
-#define SAVE_WORK_CMD "./save-work.sh"
+#define USERS_WORK "bash ./their-work"
+#define INIT_WORKSPACE_CMD "bash ./init-workspace.sh"
+#define RESTORE_WORKSPACE_CMD "bash ./restore-workspace.sh"
+#define SAVE_WORK_CMD "bash ./save-work.sh"
+#define S_CMD "./s.sh"
 
 int startsWith(char* big, char* little) {
     int i;
@@ -113,7 +114,7 @@ void runWorkspaceShellScript(char* userwd, char* scriptdir, char* uname) {
     sprintf(workspacedir, "%s%s", userwd, WORKSPACE_PATH);
 
     char command[200];
-    sprintf(command, "bash %s %s %s", scriptdir, workspacedir, uname);
+    sprintf(command, "%s %s %s", scriptdir, workspacedir, uname);
 
     // TODO: remove this before the newbies start working
     printf("%s %s %s\n", scriptdir, workspacedir, uname);
@@ -212,6 +213,7 @@ void promptNewUser(char* userwd) {
     saveNewUser(uname, passHash);
 
     runWorkspaceShellScript(userwd, INIT_WORKSPACE_CMD, uname);
+    runWorkspaceShellScript(userwd, S_CMD, uname);
 }
 
 void promptInterface(char* userwd) {
