@@ -7,6 +7,8 @@ round2/checkCredentials
 round2/isUserTaken
 round2/saveWork
 
+round2/workspace-template/build
+
 # Tentative
 round2/users.csv
 round2/their-work
