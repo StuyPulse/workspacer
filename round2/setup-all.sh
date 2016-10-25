@@ -1,7 +1,12 @@
-for i in {1..3}; do
+for i in {2..32}; do
     # TODO: switch the first 3 sections of this to work for cslab4 (currently
     # this uses the kitchen)
-    comp=149.89.18.$i
+    if [[ $i -lt 10 ]]; then
+	comp=149.89.161.10$i
+	# For cslab1: 149.89.150.10$i
+    else
+	comp=149.89.161.1$i
+    fi
     ssh ${comp} "rm -rf /var/tmp/robo; rm -rf /var/tmp/robo-libs"
     scp -r ~/client2 ${comp}:/var/tmp/robo
     scp -r ~/workspace-libs ${comp}:/var/tmp/robo-libs
