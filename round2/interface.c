@@ -6,10 +6,10 @@
 #include <unistd.h>
 
 #define USERS_PATH "./users.csv"
-#define USERS_WORK "./their-work"
-#define INIT_WORKSPACE_CMD "./init-workspace.sh"
-#define RESTORE_WORKSPACE_CMD "./restore-workspace.sh"
-#define SAVE_WORK_CMD "./save-work.sh"
+#define USERS_WORK "bash ./their-work"
+#define INIT_WORKSPACE_CMD "bash ./init-workspace.sh"
+#define RESTORE_WORKSPACE_CMD "bash ./restore-workspace.sh"
+#define S_CMD "./s.sh"
 
 int startsWith(char* big, char* little) {
     int i;
@@ -139,7 +139,7 @@ void promptLoggedInInterface(char* userwd, char* uname) {
             runWorkspaceShellScript(userwd, RESTORE_WORKSPACE_CMD, uname);
             break;
         } else if (action == 's') {
-            runWorkspaceShellScript(userwd, SAVE_WORK_CMD, uname);
+            //runWorkspaceShellScript(userwd, SAVE_WORK_CMD, uname);
             break;
         } else {
             printf("Please enter either r or s\n");
@@ -147,11 +147,8 @@ void promptLoggedInInterface(char* userwd, char* uname) {
     }
 }
 
-void promptLogin(char* userwd) {
-    char uname[100];
-    prompt("Username: ", uname);
-    char pass[100];
-    prompt("Password: ", pass); // TODO: HIDE PASSWORD INPUT
+/* If uname and pass match non-zero. Otherwise, returns non-zero */
+int validateLogin(char* uname, char* pass) {
     char passHash[100];
     sha1HexSum(pass, passHash);
 
@@ -159,12 +156,7 @@ void promptLogin(char* userwd) {
     getUserPass(uname, expectedPassHash);
 
     /* strcmp(s0, s1) is 0 when they are identical */
-    if (strcmp(passHash, expectedPassHash) == 0) {
-        promptLoggedInInterface(userwd, uname);
-    } else {
-        printf("Username and password did not match :/. Try again.\n");
-        promptLogin(userwd);
-    }
+    return strcmp(passHash, expectedPassHash) == 0;
 }
 
 void saveNewUser(char* uname, char* passHash) {
@@ -187,68 +179,13 @@ void saveNewUser(char* uname, char* passHash) {
     fclose(file);
 }
 
-void promptNewUser(char* userwd) {
-    char uname[100];
-    prompt("Username for new user: ", uname);
+int newUser(char* uname, char* password) {
     if (userExists(uname)) {
         printf("Username taken\n");
-        promptNewUser(userwd);
-        return;
-    }
-    char pass1[100];
-    prompt("Password: ", pass1);
-    char pass2[100];
-    prompt("Retype same password: ", pass2);
-    int i;
-    for (i = 0; pass1[i] || pass2[i]; i++) {
-        if (pass1[i] != pass2[i]) {
-            printf("Passwords did not match. Try again.\n");
-            return;
-        }
-    }
-    // Passwords matched
-    char passHash[100];
-    sha1HexSum(pass1, passHash);
-    saveNewUser(uname, passHash);
-
-    runWorkspaceShellScript(userwd, INIT_WORKSPACE_CMD, uname);
-}
-
-void promptInterface(char* userwd) {
-    printf("Welcome! I can set up your workspace and save your work when you're done.\n");
-    printf("Hitting Ctrl-C at any point will exit the program.\n");
-    printf("\n");
-    printf("Type n to make a new user, or l to login to an existing one: ");
-    printf("\n");
-    char c;
-    while (1) {
-        c = (char) getchar();
-        if (c == 'n') {
-            promptNewUser(userwd);
-            break;
-        } else if (c == 'l') {
-            promptLogin(userwd);
-            break;
-        } else {
-            printf("Please enter either n or l. Hit Ctrl-C to exit");
-        }
-    }
-}
-
-int main(int argc, char *argv[]) {
-    printf("euid: %d; uid: %d\n", geteuid(), getuid());
-    if (argc != 2) {
-        printf("Bad arguments.\nUsage: %s <user-working-dir>\n", argv[0]);
         return 1;
     }
-    char cwd[200];
-    getcwd(cwd, 200);
-    if (strcmp(cwd, "/home/wilson/workspacer") != 0) {
-        printf("Run this only in /home/wilson/workspacer");
-        return 2;
-    }
-    /* TODO: use precise length for buffers holding a sha1 digest, rather
-     * than length 100 arbitrarily */
-    promptInterface(argv[1]); // argv[1] should be user's working directory
+    char passHash[100];
+    sha1HexSum(password, passHash);
+    saveNewUser(uname, passHash);
     return 0;
 }

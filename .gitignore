@@ -1,7 +1,12 @@
-*.class
-a.out
+*~
 *.o
+client2/.ssh
+id_rsa
+round2/addUser
+round2/checkCredentials
+round2/isUserTaken
+round2/saveWork
 
-users.csv
-their-work/
-*.jar
+# Tentative
+round2/users.csv
+round2/their-work

@@ -1,0 +1,9 @@
+To set up (at the beginning of each meeting):
+   - run make-ssh.sh
+   - run setup-all.sh
+
+To set up a new instance of this project:
+   $ touch round2/users.csv
+   $ mkdir round2/their-work
+   $ ln -s /path/to/repo/round2 ~/round2
+   $ ln -s /path/to/repo/client2 ~/client2
