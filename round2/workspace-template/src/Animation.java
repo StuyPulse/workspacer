@@ -4,7 +4,8 @@ public class Animation extends GuiSimple {
     private double yPos;
     private double velocity;
 
-    public void setup() {
+    // This runs when an Animation is created
+    public Animation() {
         yPos = 0.0;
         velocity = 0.0;
     }
