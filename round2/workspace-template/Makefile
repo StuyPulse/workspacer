@@ -15,6 +15,8 @@ COMPILE = $(JAVAC) $(JAVA_FLAGS)
 
 .DEFAULT_GOAL := all
 
+class=Animation
+
 all: clean init-bin
 	find $(SRC) -name '*.java' -print | xargs $(COMPILE)
 
