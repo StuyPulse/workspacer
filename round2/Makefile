@@ -2,6 +2,7 @@ all:
 	gcc -c interface.c
 	gcc -c isUserTaken.c
 	gcc -c addUser.c
+	chmod +s addUser
 	gcc -c checkCredentials.c
 	gcc -c saveWork.c
 	gcc interface.o isUserTaken.o -o isUserTaken
