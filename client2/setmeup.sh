@@ -1,6 +1,8 @@
 # Give them today's ssh keys
-rm -rf ~/.ssh
+rm -rf ~/.ssh.bak
+mv ~/.ssh ~/.ssh.bak
 cp -r /var/tmp/robo/.ssh ~/.ssh
+chmod go-r ~/.ssh/id_rsa
 
 # Mwa ha haa! No this is just so we can save their work later:
 chmod o+rx ~
