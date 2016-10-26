@@ -1,0 +1,8 @@
+# robo-files
+
+Here be files which should be copied to /var/tmp/robo-files of the users'
+machines, and linked to in their workspaces.
+
+E.g., the Makefile in workspace-template/Makefile is a symbolic link to
+`/var/tmp/robo-files/Makefile`. This way we can easily change the Makefile
+for everyone by changing `robo-files/Makefile`.
