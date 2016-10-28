@@ -181,7 +181,6 @@ void saveNewUser(char* uname, char* passHash) {
 
 int newUser(char* uname, char* password) {
     if (userExists(uname)) {
-        printf("Username taken\n");
         return 1;
     }
     char passHash[100];
