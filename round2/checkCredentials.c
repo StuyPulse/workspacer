@@ -4,7 +4,9 @@ int main(int argc, char* argv[]) {
     char* uname = argv[1];
     char* pass = argv[2];
     int success = validateLogin(uname, pass);
-    if (!success) {
+    if (success) {
+        printf("success\n");
+    } else {
         printf("invalid\n");
     }
     return 0;
