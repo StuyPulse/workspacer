@@ -24,10 +24,14 @@ read -s pass
 
 echo ""
 
-#tar cf - workspace | ssh "robotics-entry@${HOSTNAME}" "cd /home/students/2019/robotics/round2 && ./save-workspace.sh"
-# ^ ./save-workspace.sh will be difficult. SUID shouldn't work right on it. Perhaps SUID on C executable which runs it thru sh.
-
 workspacedir="$HOME/workspace"
+
+if [[ ! -d "$workspacedir" ]]; then
+    echo "You have no workspace to save. Perhaps you want to login. The command"
+    echo " $ login"
+    echo "will log you in so you can see your work."
+    exit 1
+fi
 
 output=$(ssh robotics-entry@${HOSTNAME} "cd $round2path && ./saveWork $workspacedir $uname $pass")
 
