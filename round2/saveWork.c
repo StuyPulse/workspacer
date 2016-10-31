@@ -8,7 +8,7 @@ int main(int argc, char* argv[]) {
     char* pass = argv[3];
     char command[100];
     if (validateLogin(uname, pass)) {
-        sprintf(command, "%s %s %s", SAVE_WORK_CMD, workspacedir, uname);
+        sprintf(command, "bash %s %s %s", SAVE_WORK_CMD, workspacedir, uname);
         system(command);
         return 0;
     }

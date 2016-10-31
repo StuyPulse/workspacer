@@ -31,8 +31,6 @@ workspacedir="$HOME/workspace"
 
 output=$(ssh robotics-entry@${HOSTNAME} "cd $round2path && ./saveWork $workspacedir $uname $pass")
 
-echo "did output"
-
 if [[ "$output" == bad-credentials ]]; then
     echo "Username and password did not match."
 else

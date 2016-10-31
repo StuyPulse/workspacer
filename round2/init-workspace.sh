@@ -1,3 +1,4 @@
+# TODO: REMOVE THIS
 if [ -z $1 ]; then
     echo "No arguments given. First argument must be path to the edu-workspace directory to be created and populated"
     exit 1
