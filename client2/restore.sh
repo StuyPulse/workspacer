@@ -27,17 +27,13 @@ read -s pass
 
 echo ""
 
-#tar cf - workspace | ssh "robotics-entry@${HOSTNAME}" "cd /home/students/2019/robotics/round2 && ./save-workspace.sh"
-# ^ ./save-workspace.sh will be difficult. SUID shouldn't work right on it. Perhaps SUID on C executable which runs it thru sh.
-
 workspacedir="$HOME/workspace"
 
 output=$($sshcmd "cd $round2path && ./checkCredentials \"$uname\" \"$pass\"")
-echo -e "output:\n$output\n\n"
+
 if [[ "$output" == invalid ]]; then
     echo "Username and password did not match."
 elif [[ "$output" == success ]]; then
-#elif [[ "$output" == success ]]; do
     ssh "robotics-entry@${HOSTNAME}" "cd /home/students/2019/robotics/round2/their-work && tar cf - $uname" | tar xf -
 
     mv $uname workspace
