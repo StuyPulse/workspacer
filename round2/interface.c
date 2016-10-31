@@ -6,10 +6,6 @@
 #include <unistd.h>
 
 #define USERS_PATH "./users.csv"
-#define USERS_WORK "bash ./their-work"
-#define INIT_WORKSPACE_CMD "bash ./init-workspace.sh"
-#define RESTORE_WORKSPACE_CMD "bash ./restore-workspace.sh"
-#define S_CMD "./s.sh"
 
 int startsWith(char* big, char* little) {
     int i;
@@ -119,32 +115,6 @@ void runWorkspaceShellScript(char* userwd, char* scriptdir, char* uname) {
     printf("%s %s %s\n", scriptdir, workspacedir, uname);
 
     system(command);
-}
-
-
-void prompt(char* p, char* buf) {
-    printf("%s", p);
-    scanf("%s", buf);
-}
-
-void promptLoggedInInterface(char* userwd, char* uname) {
-    printf("Welcome, %s! What would you like me to do?\n", uname);
-    printf("Type r and I'll restore your workspace\n");
-    printf("Type s and I'll save your work\n");
-    char action;
-    while (1) {
-        action = getchar();
-        if (action == 'r') {
-            printf("Running restore\n");
-            runWorkspaceShellScript(userwd, RESTORE_WORKSPACE_CMD, uname);
-            break;
-        } else if (action == 's') {
-            //runWorkspaceShellScript(userwd, SAVE_WORK_CMD, uname);
-            break;
-        } else {
-            printf("Please enter either r or s\n");
-        }
-    }
 }
 
 /* If uname and pass match non-zero. Otherwise, returns non-zero */
