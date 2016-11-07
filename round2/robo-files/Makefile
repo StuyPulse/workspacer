@@ -1,3 +1,5 @@
+# Makefile for users' workspaces
+
 PROJECT_ROOT = $(shell pwd)
 
 LIB = $(PROJECT_ROOT)/lib
@@ -13,8 +15,9 @@ CLASSPATH = $(BIN):$(EDUGUI):$(JAVAFX)
 JAVA_FLAGS = -g -d $(BIN) -cp $(CLASSPATH)
 COMPILE = $(JAVAC) $(JAVA_FLAGS)
 
-.DEFAULT_GOAL := all
+.DEFAULT_GOAL := run
 
+# By default, run Animation class. Override with `make class=CLASS`
 class=Animation
 
 all: clean init-bin
@@ -26,5 +29,5 @@ clean:
 init-bin:
 	mkdir $(BIN)
 
-run:
+run: all
 	java -cp $(CLASSPATH) $(class)
