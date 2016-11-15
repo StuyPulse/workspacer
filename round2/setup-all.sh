@@ -1,4 +1,4 @@
-for i in {1..32}; do
+for i in {0..32}; do
     if [[ $i -lt 10 ]]; then
 	comp=149.89.161.10$i
 	# For cslab1: 149.89.150.10$i
