@@ -158,3 +158,10 @@ int newUser(char* uname, char* password) {
     saveNewUser(uname, passHash);
     return 0;
 }
+
+void normalize_uname(char* uname) {
+  size_t i;
+  for (i = 0; uname[i]; i++) {
+    uname[i] = tolower(uname[i]);
+  }
+}

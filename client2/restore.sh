@@ -11,6 +11,8 @@ echo -n "Username: "
 
 read uname
 
+uname=$(echo "$uname" | tr '[:upper:]' '[:lower:]')
+
 HOSTNAME=localhost
 sshcmd="ssh robotics-entry@${HOSTNAME}"
 
