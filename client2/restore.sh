@@ -3,20 +3,41 @@
 uname=$1
 HOSTNAME=localhost
 
+sshcmd="ssh robotics-entry@${HOSTNAME}"
+round2path="/home/students/2019/robotics/round2"
+
 echo "Hello! You will be logging in and getting you work from last time."
 
 echo "Hit Ctrl-C at any point to exit."
 
 echo -n "Username: "
 
-read uname
+existing_users=$(cat ~/.robo-user-list)
+
+tab(){
+    if [[ -n $READLINE_LINE ]]; then
+        options=$(compgen -W "${existing_users}" -- ${READLINE_LINE} | tr "\n" " " | sed "s/\s\+$//")
+        if [[ $(echo "$options" | wc -w) -eq 1 ]]; then
+            READLINE_LINE=$options
+            READLINE_POINT="${#READLINE_LINE}"
+            echo -n "Username: "
+        else
+            echo -ne "Suggestions: $options\nUsername: "
+        fi
+    else
+        # Without this, tabbing while there's no input would remove the prompt
+        echo -n "Username: "
+    fi
+}
+# Bind tab to tab-complete, and space to no-op
+set -o emacs
+nospaces="No spaces in username\nUsername: "
+bind -x "\" \":'echo -en \"$nospaces\"'"
+bind -x '"\t":"tab"' # Tab-complete
+bind -r "\C-V" # By default, C-V allows literal insertion of chars
+read -e uname # -e means use GNU Readline
 
 uname=$(echo "$uname" | tr '[:upper:]' '[:lower:]')
-
-HOSTNAME=localhost
-sshcmd="ssh robotics-entry@${HOSTNAME}"
-
-round2path="/home/students/2019/robotics/round2"
 
 if [[ $($sshcmd $round2path/isUserTaken) -ne "taken" ]]; then
     echo "There is no user named \"$uname\"."

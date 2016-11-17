@@ -52,6 +52,7 @@ int getLineHashEntry(char* line, char* hashBuf) {
  * desktops */
 void sha1HexSum(char* pass, char* hashBuf) {
     char command[150];
+    // TODO: MUST SANITIZE
     sprintf(command, "echo \"%s\" | /usr/bin/sha1sum", pass);
     FILE *fp;
     fp = popen(command, "r");
