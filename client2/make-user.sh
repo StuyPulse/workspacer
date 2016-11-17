@@ -4,9 +4,23 @@ echo "Hello! You will be making a new user."
 
 echo "Hit Ctrl-C at any point to exit."
 
-echo -n "Username: "
+echo "Username: "
 
-read uname
+tab(){
+    words=$(ls ~/round2/their-work)
+    if [[ -n $READLINE_LINE ]]; then
+        options=$(compgen -W "${words}" -- ${READLINE_LINE} | tr "\n" " " | sed "s/\s\+$//")
+        if [[ $(echo "$options" | wc -w) -eq 1 ]]; then
+            READLINE_LINE=$options
+            READLINE_POINT="${#READLINE_LINE}"
+        else
+            echo "Suggestions: $options"
+        fi
+    fi
+}
+set -o emacs
+bind -x '"\t":"tab"'
+read -e uname
 
 uname=$(echo "$uname" | tr '[:upper:]' '[:lower:]')
 
