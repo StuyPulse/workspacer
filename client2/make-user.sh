@@ -4,7 +4,7 @@ echo "Hello! You will be making a new user."
 
 echo "Hit Ctrl-C at any point to exit."
 
-echo "Username: "
+echo -n "Username: "
 
 tab(){
     words=$(ls ~/round2/their-work)
@@ -13,13 +13,21 @@ tab(){
         if [[ $(echo "$options" | wc -w) -eq 1 ]]; then
             READLINE_LINE=$options
             READLINE_POINT="${#READLINE_LINE}"
+	    echo -n "Username: "
         else
-            echo "Suggestions: $options"
+            echo -ne "Suggestions: $options\nUsername: "
         fi
+    else
+	# Without this, tabbing while there's no input would remove the prompt
+	echo -n "Username: "
     fi
 }
+# Bind tab to tab-complete, and space to no-op
 set -o emacs
-bind -x '"\t":"tab"'
+nospaces="No spaces in username\nUsername: "
+bind -x "\" \":'echo -en \"$nospaces\"'"
+bind -x '"\t":"tab"' # Tab-complete
+bind -r "\C-V" # By default C-V allows literal insertion of chars
 read -e uname
 
 uname=$(echo "$uname" | tr '[:upper:]' '[:lower:]')
