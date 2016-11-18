@@ -1,6 +1,5 @@
 # Runs as guest user
 
-uname=$1
 HOSTNAME=localhost
 
 sshcmd="ssh robotics-entry@${HOSTNAME}"

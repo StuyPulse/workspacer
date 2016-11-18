@@ -43,12 +43,12 @@ if [[ "$pass1" == "$pass2" ]]; then
     else
         echo "Created your user!"
 
-	# Copy default workspace to home directory:
+        # Copy default workspace to home directory:
         ssh "robotics-entry@${HOSTNAME}" "cd $round2path; tar cf - workspace-template" | tar xf -
         mv workspace-template workspace
         chmod +r ~/workspace
 
-	# Save default workspace to their-work (and set permissions):
+        # Save default workspace to their-work (and set permissions):
         ssh "robotics-entry@${HOSTNAME}" "cd $round2path && cp -r workspace-template \"their-work/$uname\" && chmod -R g+rw \"their-work/$uname\" && chown -R :robogroup \"their-work/$uname\""
 
         echo -e "Type\n  cd workspace\nto enter your workspace"
