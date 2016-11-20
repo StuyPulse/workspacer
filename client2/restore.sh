@@ -58,6 +58,10 @@ elif [[ "$output" == success ]]; then
 
     mv $uname workspace
 
+    # Update `/var/tmp/robo-user-homedir`. Note: this must be done
+    # as user robotics-entry so the file isn't owned by old guest sessions.
+    $sshcmd "echo $HOME > /var/tmp/robo-user-homedir"
+
     echo "Logged you in!"
     echo -e "\nType\n  cd workspace\nto enter your workspace"
 else

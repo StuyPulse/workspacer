@@ -50,6 +50,9 @@ if [[ "$pass1" == "$pass2" ]]; then
         # Save default workspace to their-work (and set permissions):
         $sshcmd "cd $round2path && cp -r workspace-template \"their-work/$uname\" && chmod -R g+rw \"their-work/$uname\" && chown -R :robogroup \"their-work/$uname\""
 
+        # Update /var/tmp/robo-user-homedir
+        $sshcmd "echo $HOME > /var/tmp/robo-user-homedir"
+
         echo -e "Type\n  cd workspace\nto enter your workspace"
     fi
 else
