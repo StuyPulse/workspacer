@@ -61,5 +61,5 @@ elif [[ "$output" == success ]]; then
     echo "Logged you in!"
     echo -e "\nType\n  cd workspace\nto enter your workspace"
 else
-    echo "An unknown error has occured. Try again, or ask Adris for help."
+    echo "An unknown error has occured. Try again, or ask an older member for help."
 fi
