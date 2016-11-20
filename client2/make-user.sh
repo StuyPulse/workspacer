@@ -15,8 +15,7 @@ read -e uname
 
 uname=$(echo "$uname" | tr '[:upper:]' '[:lower:]')
 
-HOSTNAME=localhost
-sshcmd="ssh robotics-entry@${HOSTNAME}"
+sshcmd="ssh robotics-entry@localhost"
 
 round2path="/home/students/2019/robotics/round2"
 
@@ -44,12 +43,12 @@ if [[ "$pass1" == "$pass2" ]]; then
         echo "Created your user!"
 
         # Copy default workspace to home directory:
-        ssh "robotics-entry@${HOSTNAME}" "cd $round2path; tar cf - workspace-template" | tar xf -
+        $sshcmd "cd $round2path; tar cf - workspace-template" | tar xf -
         mv workspace-template workspace
         chmod +r ~/workspace
 
         # Save default workspace to their-work (and set permissions):
-        ssh "robotics-entry@${HOSTNAME}" "cd $round2path && cp -r workspace-template \"their-work/$uname\" && chmod -R g+rw \"their-work/$uname\" && chown -R :robogroup \"their-work/$uname\""
+        $sshcmd "cd $round2path && cp -r workspace-template \"their-work/$uname\" && chmod -R g+rw \"their-work/$uname\" && chown -R :robogroup \"their-work/$uname\""
 
         echo -e "Type\n  cd workspace\nto enter your workspace"
     fi

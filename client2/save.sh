@@ -10,8 +10,7 @@ read uname
 
 uname=$(echo "$uname" | tr '[:upper:]' '[:lower:]')
 
-HOSTNAME=localhost
-sshcmd="ssh robotics-entry@${HOSTNAME}"
+sshcmd="ssh robotics-entry@localhost"
 
 round2path="/home/students/2019/robotics/round2"
 
@@ -35,7 +34,7 @@ if [[ ! -d "$workspacedir" ]]; then
     exit 1
 fi
 
-output=$(ssh robotics-entry@${HOSTNAME} "cd $round2path && ./saveWork "$workspacedir" \"$uname\" \"$pass\"")
+output=$($sshcmd "cd $round2path && ./saveWork "$workspacedir" \"$uname\" \"$pass\"")
 
 if [[ "$output" == bad-credentials ]]; then
     echo "Username and password did not match."

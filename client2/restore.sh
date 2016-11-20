@@ -1,8 +1,6 @@
 # Runs as guest user
 
-HOSTNAME=localhost
-
-sshcmd="ssh robotics-entry@${HOSTNAME}"
+sshcmd="ssh robotics-entry@localhost"
 round2path="/home/students/2019/robotics/round2"
 
 echo "Hello! You will be logging in and getting you work from last time."
@@ -56,7 +54,7 @@ output=$($sshcmd "cd $round2path && ./checkCredentials \"$uname\" \"$pass\"")
 if [[ "$output" == invalid ]]; then
     echo "Username and password did not match."
 elif [[ "$output" == success ]]; then
-    ssh "robotics-entry@${HOSTNAME}" "cd /home/students/2019/robotics/round2/their-work && tar cf - $uname" | tar xf -
+    $sshcmd "cd $round2path/their-work && tar cf - $uname" | tar xf -
 
     mv $uname workspace
 
