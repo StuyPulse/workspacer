@@ -5,13 +5,17 @@ import gui.GuiSimple;
 public class Animation extends GuiSimple {
 
     // Initialize Variables
+    private double xPos;
     private double yPos;
-    private double velocity;
+    private double xVelocity;
+    private double yVelocity;
 
     // This runs when an Animation is created
     public Animation() {
+        xPos = 200.0;
         yPos = 0.0;
-        velocity = 0.0;
+        xVelocity = 1.0;
+        yVelocity = 0.0;
     }
 
     // draw(). Is called once every frame
@@ -20,15 +24,28 @@ public class Animation extends GuiSimple {
         screen.clear();
 
         // screen.circle( x , y , radius )
-        screen.circle(200, yPos, 10);
+        screen.circle(xPos, yPos, 10);
 
         // "Bounce" when we reach the bottom of the screen
-        if (yPos >= 400) {
-            velocity *= -1;
+        if (yPos > 400) {
+            yPos = 400
+            yVelocity *= -1;
         }
-        // Increase velocity to simulate gravity and change yPos by velocity
-        velocity += 0.5;
-        yPos += velocity;
+
+        // Bounce when we reach the sides of the screen
+        if (xPos > 400) {
+            xPos = 400;
+            xVelocity *= -1;
+        } else if (xPos < 0) {
+            xPos = 0;
+            xVelocity *= -1
+        }
+
+        // simulate gravity
+        yVelocity += 0.5;
+
+        xPos += xVelocity;
+        yPos += yVelocity;
     }
 
     // main(). You'll learn what this means later
