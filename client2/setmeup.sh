@@ -16,3 +16,7 @@ echo "alias login='/var/tmp/robo/restore.sh'" >> ~/.bash_aliases
 
 round2path=/home/students/2019/robotics/round2
 ssh robotics-entry@localhost "ls $round2path/their-work" > ~/.robo-user-list
+
+# Create link to java API docs on desktop
+cd ~/Desktop
+ln -s /var/tmp/robo-files/JavaDocs.html JavaDocs.html
