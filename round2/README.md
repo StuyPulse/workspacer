@@ -1,3 +1,5 @@
+# Setup
+
 `copy-docs-all.sh` will copy the Java SE 8 API docs to all machines in rm. 451
 which do not have them (at `/var/tmp/javase8-api`).
 
@@ -5,7 +7,7 @@ which do not have them (at `/var/tmp/javase8-api`).
 
 `setup-all.sh` copies necessary libraries for JavaFX to the machines that
 do not have them (at `/var/tmp/robo-libs`), and updates necessary plaintext
-on all the machines.
+files on all the machines.
 
     $ bash setup-all.sh
 
