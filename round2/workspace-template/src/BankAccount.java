@@ -1,3 +1,4 @@
+// From Lesson 5 (Nov 21)
 public class BankAccount {
     private double balance;
     private String firstName;
@@ -17,10 +18,9 @@ public class BankAccount {
         BankAccount myBank = new BankAccount("Bruce", "Wayne");
         System.out.println(myBank.balance);
         System.out.println(myBank.firstName + " " + myBank.lastName);
-        
+
         myBank.deposit(1000.0);
-        
+
         System.out.println(myBank.balance);
     }
 }
-

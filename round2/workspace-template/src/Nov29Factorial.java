@@ -1,6 +1,8 @@
+// From Lesson 6 (Nov 29)
+
 import java.util.Scanner;
 
-public class MyClass {
+public class Nov29Factorial {
     public static int factorial(int n) {
         int count = 1;
         int result = 1;
@@ -12,12 +14,11 @@ public class MyClass {
         return result;
     }
 
-
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
 
         int input = s.nextInt();
-    
+
         int fact = factorial(input);
         System.out.println(fact);
     }
