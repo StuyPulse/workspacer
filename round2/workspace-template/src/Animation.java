@@ -1,34 +1,32 @@
+
+
+
+
+
+
+//That was stupid.
+
 import gui.GuiSimple;
 
-// Animation: Our first class!
-// The comments are a bit excessive, but hopefully they get the ideas across.
 public class Animation extends GuiSimple {
 
-    // Initialize Variables
-    private double yPos;
-    private double velocity;
+    public Ball wilson;
+    public Ball spalding;
 
     // This runs when an Animation is created
     public Animation() {
-        yPos = 0.0;
-        velocity = 0.0;
+        wilson = new Ball(2.718, 6.28);
+        spalding = new Ball(3.33,3.43);
     }
 
     // draw(). Is called once every frame
     public void draw() {
-        // clear the screen so that we don't redraw to the same frame
+        //jebron
         screen.clear();
-
-        // screen.circle( x , y , radius )
-        screen.circle(200, yPos, 10);
-
-        // "Bounce" when we reach the bottom of the screen
-        if (yPos >= 400) {
-            velocity *= -1;
-        }
-        // Increase velocity to simulate gravity and change yPos by velocity
-        velocity += 0.5;
-        yPos += velocity;
+        wilson.update();
+        spalding.update();
+        wilson.render(screen);
+        spalding.render(screen);
     }
 
     // main(). You'll learn what this means later

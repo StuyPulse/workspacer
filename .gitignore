@@ -8,6 +8,7 @@ round2/isUserTaken
 round2/saveWork
 
 round2/workspace-template/build
+*.class
 
 # Tentative
 round2/users.csv

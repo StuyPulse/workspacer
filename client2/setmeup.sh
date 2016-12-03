@@ -20,6 +20,10 @@ echo -e "Say 'yes' to the following prompt:\n"
 
 ssh robotics-entry@localhost "ls $round2path/their-work" > ~/.robo-user-list
 
+# Create link to java API docs on desktop
+cd ~/Desktop
+ln -s /var/tmp/robo-files/JavaDocs.html JavaDocs.html
+
 echo "" # visual separation after SSH stuff
 echo "You're all set up! (If there were errors above, ask for help.)"
 echo "To start work, close this window and open up a new terminal by hitting Ctrl+Alt+T"
