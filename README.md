@@ -1,4 +1,8 @@
-# Setup
+# workspacer
+
+Workspacer allows newbies to save their work at the end of meetings, (while on
+Guest accounts), and allows us to give them class skeletons, documentation files
+(without giving access to the internet) and such.
 
 ## Setting up this repo
 
@@ -34,3 +38,10 @@ Between meetings (preferably at the end of each meeting, for security's sake),
 After running `make-ssh.sh`, `setup-all.sh` *must* be run
 again in order for the students to work.
 
+---
+
+#### What's the `LICENSE` about?
+
+It's called the [MIT License](http://choosealicense.com/licenses/mit/).
+We'd love if other people and teams use this project, and the MIT License
+makes sure you can.
