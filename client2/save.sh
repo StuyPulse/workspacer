@@ -4,9 +4,7 @@ echo "Hello! You will be saving your workspace."
 
 echo "Hit Ctrl-C at any point to exit."
 
-echo -n "Username: "
-
-read uname
+read -rep "Username: " uname
 
 uname=$(echo "$uname" | tr '[:upper:]' '[:lower:]')
 
@@ -19,9 +17,7 @@ if [[ $($sshcmd $round2path/isUserTaken) -ne "taken" ]]; then
     exit 1
 fi
 
-echo -n "Password: "
-
-read -s pass
+read -rsp "Password: " pass
 
 echo ""
 

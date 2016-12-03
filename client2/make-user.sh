@@ -4,14 +4,12 @@ echo "Hello! You will be making a new user."
 
 echo "Hit Ctrl-C at any point to exit."
 
-echo -n "Username: "
-
 # Bind space to no-op
 set -o emacs
-nospaces="No spaces in username\nUsername: "
+nospaces="No spaces in username\n"
 bind -x "\" \":'echo -en \"$nospaces\"'"
 bind -r "\C-V" # By default, C-V allows literal insertion of chars
-read -e uname
+read -rep "Username: " uname
 
 uname=$(echo "$uname" | tr '[:upper:]' '[:lower:]')
 
@@ -24,15 +22,11 @@ if [[ $($sshcmd $round2path/isUserTaken) == "taken" ]]; then
     exit 1
 fi
 
-echo -n "Password: "
-
-read -s pass1
+read -rsp "Password: " pass1
 
 echo ""
 
-echo -n "Confirm password: "
-
-read -s pass2
+read -rsp "Confirm password: " pass2
 
 echo ""
 

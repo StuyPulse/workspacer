@@ -7,8 +7,6 @@ echo "Hello! You will be logging in and getting you work from last time."
 
 echo "Hit Ctrl-C at any point to exit."
 
-echo -n "Username: "
-
 existing_users=$(cat ~/.robo-user-list)
 
 tab(){
@@ -17,22 +15,18 @@ tab(){
         if [[ $(echo "$options" | wc -w) -eq 1 ]]; then
             READLINE_LINE=$options
             READLINE_POINT="${#READLINE_LINE}"
-            echo -n "Username: "
         else
-            echo -ne "Suggestions: $options\nUsername: "
+            echo -ne "Suggestions: $options\n"
         fi
-    else
-        # Without this, tabbing while there's no input would remove the prompt
-        echo -n "Username: "
     fi
 }
 # Bind tab to tab-complete, and space to no-op
 set -o emacs
-nospaces="No spaces in username\nUsername: "
+nospaces="No spaces in username\n"
 bind -x "\" \":'echo -en \"$nospaces\"'"
 bind -x '"\t":"tab"' # Tab-complete
 bind -r "\C-V" # By default, C-V allows literal insertion of chars
-read -e uname # -e means use GNU Readline
+read -rep "Username: " uname # -e means use GNU Readline
 
 uname=$(echo "$uname" | tr '[:upper:]' '[:lower:]')
 
@@ -41,9 +35,7 @@ if [[ $($sshcmd $round2path/isUserTaken) -ne "taken" ]]; then
     exit 1
 fi
 
-echo -n "Password: "
-
-read -s pass
+read -rsp "Password: " pass
 
 echo ""
 
