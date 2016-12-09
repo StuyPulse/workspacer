@@ -23,6 +23,7 @@ ssh robotics-entry@localhost "ls $round2path/their-work" > ~/.robo-user-list
 # Create link to java API docs on desktop
 cd ~/Desktop
 ln -s /var/tmp/robo-files/JavaDocs.html JavaDocs.html
+ln -s /var/tmp/robo-files/lessons.html lessons.html
 
 echo "" # visual separation after SSH stuff
 echo "You're all set up! (If there were errors above, ask for help.)"

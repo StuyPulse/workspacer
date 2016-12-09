@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html class="" lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Language" content="en">
+  <link rel="stylesheet" type="text/css" href="/github-syntax-highlight.css">
+  <link rel="stylesheet" type="text/css" href="/github-markdown.css">
+  <style>
+    .markdown-body {
+      min-width: 200px;
+      max-width: 790px;
+      margin: 0 auto;
+      padding: 30px;
+    }
+  </style>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io.connect('http://localhost:8090/');
+    socket.on('connect', function () {
+      socket.on('newContent', function(newHTML) {
+        document.querySelector(".markdown-body").innerHTML = newHTML;
+      });
+      socket.on('die', function(newHTML) {
+        window.open('', '_self', '');
+        window.close();
+
+        var firefoxWarning =
+        "<h1>Oops!</h1>" +
+        "<h3>Firefox doesn't allow windows to self-close.</h3>" +
+        "<h3>If you want the preview window to close automatically like in other browsers, go to about:config and set dom.allow_scripts_to_close_windows to true.</h3>"
+        document.body.innerHTML = firefoxWarning;
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="container">
+      <div class="repository-with-sidebar repo-container new-discussion-timeline with-full-navigation">
+        <div id="js-repo-pjax-container" class="repository-content context-loader-container">
+          <div id="readme" class="boxed-group flush clearfix announce instapaper_body md">
+            <article class="markdown-body"><h1><b id="README-top">java-edu-2017</b></h1>
+<p>Java education code and lesson notes for 2016-17 year.</p>
+<h1>Contents</h1>
+<ul>
+<li><a href="#summary-1">Lesson 1</a></li>
+<li><a href="#summary-2">Lesson 2</a></li>
+<li><a href="#summary-3">Lesson 3</a></li>
+<li><a href="#summary-4">Lesson 4</a></li>
+<li><a href="#summary-5">Lesson 5</a></li>
+<li><a href="#summary-6">Lesson 6</a></li>
+<li><a href="#summary-7">Lesson 7</a></li>
+</ul>
+<h1><b id="summary-1">Summary #1</b> <a href="#README-top">↑ </a></h1>
+<p>11/01/2016</p>
+<p>Today we took a look at the Animation class which animated a circle moving down the screen.
+We first drew some helpful diagrams and pseudocode on the board which helped us understand how the real code worked.
+asdwadswad
+Then we went over the class and some of its key components.
+The Animation code along with comments describing each element is available on thisasdwrepository within the <code>src</code> folder, which you should definitely check out if you want to understand the code along with what we did today.</p>
+<p>Edit: To make things clearer, I will describe some of the specific details in the animation class which we went over in our lesson.</p>
+<p>The first thing to note is these lines of code:</p>
+<p>`</p>
+<pre><code>private double xPos;
+private double yPos;
+</code></pre>
+<p>`</p>
+<p>These initialize the variables xPos and yPos to hold doubles (numbers with a decimal point). These variables are now usable in the code but do not yet have any value assigned to them or put into them. In order to place values in to a variable you must use the <code>=</code> operator as such:</p>
+<p>`</p>
+<pre><code>xPos = 200.0;
+yPos = 0.0;
+</code></pre>
+<p>`</p>
+<p>Here we put <code>200.0</code> into xPos and <code>0.0</code> into yPos. These values are now accessible if we call <code>xPos</code> and <code>yPos</code> in our code.</p>
+<p>Now that our variables are initialized and are assigned values, we can use these variables. In our code, the variables are used in the <code>draw()</code> method.</p>
+<p>`</p>
+<pre><code>xPos += 1.0;
+yPos += 1.0;
+</code></pre>
+<p>`</p>
+<p>this code increases <code>xPos</code> and <code>yPos</code> by 1, and is the same thing as writing</p>
+<p>`</p>
+<pre><code>xPos = xPos + 1;
+yPos = yPos + 1;
+</code></pre>
+<p>`</p>
+<p>These operations are done every time the <code>draw()</code> method is called. In the background, Java code is running the <code>draw()</code> method once every frame.</p>
+<p>(For those of you who are wondering how <code>draw()</code> is called: We cannot see how <code>draw()</code> is called because our workspace does not have the source code for the class which externally calls the <code>draw()</code> method in <code>Animation.java</code>. Instead, we have a precompiled jar file located in the <code>lib</code> directory which handles everything for us. This jar file is compiled from Wilson's java-education system found at <a href="https://github.com/Team694/java-education">https://github.com/Team694/java-education</a>. This is way ahead of where we are in our lesson so you really don't have to worry about this.)</p>
+<p>Thats about it for today. Looking foward to our next lesson!</p>
+<h1><b id="summary-2">Summary #2</b> <a href="#README-top">↑ </a></h1>
+<p>11/03/2016</p>
+<p>We had some new newbies who came in today!
+The lesson began with everybody creating and logging in to an account using the wonderful workspacer system created by Wilson which lets one to safely save files when on a guest account without internet.</p>
+<p>The way we create an account and log in works as follows:</p>
+<ol>
+<li>
+<p>Log in to a guest account on a school computer</p>
+</li>
+<li>
+<p>Once logged in, open a terminal window using Ctrl+Alt+T</p>
+</li>
+<li>
+<p>Type</p>
+</li>
+</ol>
+<p><code>$ /var/tmp/setmeup</code></p>
+<p>(without the dollar sign) and press enter to execute (this runs the file <code>setmeup</code> in the directory <code>/var/tmp/</code></p>
+<ol start="4">
+<li>
+<p>close your terminal window (either press the X button or Alt+F4 or Ctrl+C and Ctrl+D. Keyboard shortcuts make things a lot faster as you will all eventually learn)</p>
+</li>
+<li>
+<p>Reopen a terminal window and type</p>
+</li>
+</ol>
+<p><code>$ make-user</code></p>
+<p>Follow instructions and answer yes to the yes/no prompt.</p>
+<p>There will then be further instructions on how to access your workspace and you should be able to look at the files that are found in the workspace.</p>
+<ol start="6">
+<li>Once you are done and you have some changes that you want to save, type</li>
+</ol>
+<p><code>$ save</code></p>
+<p>and your workspace should be saved and accessible next time you log on to the computer.</p>
+<h4>Editing Files</h4>
+<p>You can click on "Files" which is usually the first shortcut on the left toolbar and use the gui to find and double click on your files</p>
+<p>You can open up gedit in the command line too:</p>
+<p><code>$ gedit</code></p>
+<p>and if you want to you can open files with the same command:</p>
+<p><code>$ gedit your_file_here</code></p>
+<p>After this we went over the code that we wrote last meeting so that everyone was more or less up to speed, but nothing new was added to our class.</p>
+<p>Until next time!</p>
+<h1><b id="summary-3">Summary #3</b> <a href="#README-top">↑ </a></h1>
+<p>11/14/16</p>
+<p>We began our meeting by going over what we learned last time and then we moved on to dealing with variables.</p>
+<p>We talked over how to simulate gravity and created a diagram of variables which we needed to use in order to simulate a ball falling due to gravity. The diagram looked something like this:</p>
+<pre><code>Variables:    | yPos             | velocity        |
+Start values: | yPos = 0.0       | velocity = 0.0  |
+Each frame:   | yPos += velocity | velocity += 0.5 |
+</code></pre>
+<p>Essentially, <code>velocity</code> is the "speed" of the object and on every frame, <code>yPos</code> is updated by <code>velocity</code>. While this is happening, <code>velocity</code> is increasing which simulates the acceleration of gravity on an object as it falls.</p>
+<p>Now that we have the diagram / table in front of us we can convert that into code. (you can go to <code>java-edu-2017/src/Animation.java</code> in this repository if you want to see the full code)</p>
+<p>Variables:</p>
+<pre><code>private double yPos;
+private double velocity;
+</code></pre>
+<p>Start values:</p>
+<pre><code>yPos = 0.0;
+velocity = 0.0;
+</code></pre>
+<p>Each frame the variables are updated:</p>
+<pre><code>yPos += velocity;
+velocity += 0.5;
+</code></pre>
+<p>Now we have a ball that falls from the top of the screen downward. Cool!</p>
+<p>But what if we don't want the ball to continue falling? what if we want it to bounce as soon as it hits the ground?</p>
+<p>That's where conditionals come in.</p>
+<h4>Conditionals:</h4>
+<p>Conditionals help control the code by doing specific actions when certain requirements are met. Their basic structure is this:</p>
+<p><code>If &lt;condition&gt;, then &lt;do something&gt;</code></p>
+<p>for example,</p>
+<p><code>If it is raining outside, then grab an umbrella</code></p>
+<p>or in our case,</p>
+<p><code>If the yPos touches or goes below the bottom of the screen, invert the velocity to make the ball bounce</code></p>
+<p>In Java and in many other programming languages, the syntax for this conditional is as follows:</p>
+<pre><code>if &lt;condition&gt; {
+    &lt;do something&gt;
+}
+</code></pre>
+<p>If <code>&lt;condition&gt;</code> is true, then the code inside the brackets is executed. Otherwise it is left alone and the code is not executed.</p>
+<p>In our case, our pseudocode looks something like this:</p>
+<pre><code>if (yPos is greater than 400) {
+    multiply velocity by -1
+}
+</code></pre>
+<p>(400 because the window height is 400 pixels)</p>
+<p>So how do we translate that pseudo code into REAL code?</p>
+<p>In order to do that we would need to learn how to use comparators.</p>
+<h4>Comparators:</h4>
+<p>Comparators, as their name implies, compare two values. They are like a "check" for inequality or equality.</p>
+<p>Here are a list of some Java comparators:</p>
+<pre><code>x &gt; y     (is x greater than y?)
+x &lt; y     (is x less than y?)
+x == y    (is x equal to y? NOTE THAT WE USE == and NOT =)
+x &gt;= y    (is x greater than or equal to y?)
+x &lt;= y    (is x less than or equal to y?)
+</code></pre>
+<p>we can use these comparators with conditionals to accomplish some impressive feats. And now we have all the things we need in order to make our ball bounce.</p>
+<p>But before we move on, here is a brief overview on some Java operators:</p>
+<h4>Some Operators</h4>
+<pre><code>x + y   (x plus y)
+x - y   (x minus y)
+x * y   (x multiplied by y)
+x / y   (x divided by y)
+</code></pre>
+<p>Each operator can be used with an equals after it as shorthand, for example <code>x *= 2</code> is shorthand for <code>x = x * 2</code> just like <code>x += 2</code> is shorthand for <code>x = x + 2</code></p>
+<p>Lets try applying all that we have learned and write our code:</p>
+<pre><code>if (yPos &gt;= 400) {
+    velocity *= -1
+}
+</code></pre>
+<p>Here we check if yPos is greater than 400 (the bottom of the screen) and if it is, we multiply velocity by -1 to make it bounce and go up.</p>
+<p>(This is written in the <code>draw()</code> method because you check for bouncing each frame)</p>
+<p>If you write this and give it a test, the ball should fall and bounce up when it hits the ground up to the same height you started from.</p>
+<p>That's pretty much what we did. Again, if you want to look at the whole code, it is available in this repository.</p>
+<p>Until next time!</p>
+<h1><b id="summary-4">Summary #4</b> <a href="#README-top">↑ </a></h1>
+<p>11/17/2016</p>
+<p>Today was not a very eventful day, but we did manage to get some work done.</p>
+<p>The first half ot the meeting was spent going over the code that we wrote last time. For those who need clarification on that, you can read Summary #3 for the last meeting.</p>
+<p>The other half was spent adding on to what we learned last time and making the ball bounce on the walls as well as the floor. The code that we used was almost identical to our previous code, except we applied it to X in addition to Y.</p>
+<p>In order to make the ball bounce on the walls, we need to set things up so that we can work with velocity along both the X and the Y axis. If we think about how we dealt with velocity in our previous meeting, we can apply the same to the X axis. In that case, the ball would have both an <code>xVelocity</code> variable and a <code>yVelocity</code> variable (which replaces our previons <code>velocity</code> variable because we're dealing with two axis). So we would initialize our variables just like we do any other variable:</p>
+<pre><code>private double x;
+private double y;
+private double xVelocity;
+private double yVelocity;
+</code></pre>
+<p>NOTE: We can initialize multiple variables in one line, separated by commas, if they have the same type and visibility. So if you wanted to you can potentially initialize everything like this:</p>
+<pre><code>private double x, y, xVelocity, yVelocity;
+</code></pre>
+<p>It is important to keep in mind that <code>xVelocity</code> and <code>yVelocity</code> correspond to how many pixels the ball moves per frame in the x and y direction. With that in mind we can replace our previous code for handling with velocity in the <code>draw()</code> event with this code:</p>
+<pre><code>x += xVelocity;
+y += yVelocity;
+</code></pre>
+<p>Now we can make the ball bounce on the walls using what we learned last time:</p>
+<pre><code>if (x &gt; 400) {
+    x = 400;
+    xVelocity *= -1;
+}
+if (x &lt; 0) {
+    x = 0;
+    xVelocity *= -1;
+}
+</code></pre>
+<h4>Some extra things that you might want to look at</h4>
+<p>Wilson added a new file which you should check out if you want to learn how to do more with the gui application like keyboard/mouse input or drawing images to the screen. The file is in the repository and the link is over here:</p>
+<p><a href="https://github.com/Team694/java-edu-2017/blob/master/extras.md">https://github.com/Team694/java-edu-2017/blob/master/extras.md</a></p>
+<p>For those of you who want to make a bigger application, you should take a look at creating your own objects and classes. Those will allow you to create objects which have their own properties which you can modify and use. If you want to learn more about objects and classes you can look at the Java Tutorials from Oracle: <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/index.html">https://docs.oracle.com/javase/tutorial/java/javaOO/index.html</a>. You don't have to understand every concept from the tutorials, but skimming over it might help.</p>
+<p>See yall later!</p>
+<h1><b id="summary-5">Summary #5</b> <a href="#README-top">↑ </a></h1>
+<p>2016-11-21</p>
+<h3><em>Want to play with this stuff at home? Check out <a href="https://repl.it/languages/java">repl.it</a></em></h3>
+<p>Today we went over some Java concepts. First an foremost, statements:</p>
+<h2>Statements</h2>
+<p>Statements are individual commands. You've used few kinds of statements before:</p>
+<p><strong>Assignment statements</strong> assign values to variables. For example...</p>
+<ul>
+<li><code>xPos = 0;</code></li>
+<li><code>xVelocity += 2.0;</code></li>
+</ul>
+<p><strong>Method call statements</strong> tell a "method" to run. We'll discuss methods below. For example...</p>
+<ul>
+<li>
+<p><code>screen.circle(xPos, yPos, 10.0);</code> runs the <code>circle</code> method of <code>screen</code></p>
+</li>
+<li>
+<p><code>screen.clear();</code> runs the <code>clear</code> method of <code>screen</code></p>
+</li>
+<li>
+<p><code>System.out.println("Hello!");</code> runs the <code>println</code> (pronounced "print line")
+method of <code>System.out</code>. This is a very useful method, which displays a line of
+text to the screen. Quite helpful while debugging code.</p>
+</li>
+</ul>
+<p><strong>If statements</strong> say "only run these statements if ____ is true".</p>
+<pre><code>if (yPos &gt; 400.0) {
+    yVelocity *= -1.0;
+}
+</code></pre>
+<p><strong>Variable declaration statements</strong> create a variable for us to use temporarily. E.g.:</p>
+<pre><code>double x = 1.5;
+x += 10.0;
+double pi = 3.14;
+x += pi;
+</code></pre>
+<p>Technically we haven't used these yet, but they're very similar to the variables
+you have used. To explain how they're "temporary", consider the following:</p>
+<pre><code>if (&lt;condition&gt;) {
+    double fred = 3.14;
+    ...
+}
+</code></pre>
+<p>the variable <code>fred</code> only exists between the '{' and '}' (inside the block). After
+the block ends, <code>fred</code> can no longer be used.</p>
+<p>Also notice the braces (<code>{</code> and <code>}</code>). A "block" is a series of statements
+surrounded by braces, and allows you to group many statements together.
+For example:</p>
+<pre><code>if (yPos &gt; 400.0) {
+    yPos = 400.0;
+    yVelocity *= -1.0;
+    System.out.println("Horay");
+}
+</code></pre>
+<h2>Primitive data types</h2>
+<p>When we declare a variable, we need to specify its <em>data type</em>. This specifies
+the kind of data we can store in that variable. There are 7 primitive data types:</p>
+<p>4 of them are various sizes of integers:</p>
+<ul>
+<li>A <code>byte</code> holds an integer from -128 to 127 inclusive</li>
+<li>A <code>short</code> holds an integer from -2^15 to 2^15-1 inclusive</li>
+<li>An <code>int</code> holds an integer from about -2billion to +2billion</li>
+<li>A <code>long</code> holds an integer from about -2^63 to 2^63 inclusive</li>
+</ul>
+<p>Of these, <code>int</code> is the one that matters the most by far. You may never use the others.</p>
+<p>2 of them hold various sizes of floating point numbers:</p>
+<ul>
+<li>A <code>float</code> holds a low-precision floating point number.</li>
+<li>A <code>double</code> holds a high-precision floating point number.</li>
+</ul>
+<p>A few of you asked by <code>float</code>s matter. They don't. Don't use them. <code>double</code> is better.</p>
+<p>And finally, <code>char</code> and <code>boolean</code>:</p>
+<ul>
+<li>A <code>char</code> holds a single character of text. A char is written between single quotes, e.g:<br><code>char firstLetter = 'a';</code></li>
+<li>A <code>boolean</code> is either <code>true</code> or <code>false</code>. E.g:<br><code>boolean collegeAppsSuck = true;</code></li>
+</ul>
+<h2>Classes</h2>
+<p>Java allows you to define your own data types, using something called a <code>class</code>.</p>
+<p>Let's say we want to store information about a bank account in a variable.  We
+might want to include information like the balance of the account, the name of
+the owner, and the account number.</p>
+<p><strong>None of the primitive datatypes listed above can store all that information.
+So, we create a class.</strong></p>
+<p>We start with a file called <code>BankAccount.java</code> with the following contents:</p>
+<pre><code>public class BankAccount {
+    ...
+}
+</code></pre>
+<p>Now we choose what <strong>information</strong> we want to store.</p>
+<ol>
+<li>
+<p>The bank balance:</p>
+<pre><code> public double balance;
+</code></pre>
+</li>
+<li>
+<p>The name of the account owner:</p>
+<pre><code> public String ownerName;
+</code></pre>
+<p>What's a <code>String</code>?! <code>String</code> is a class that Java gives us
+automatically.  A <code>String</code> holds text.</p>
+</li>
+<li>
+<p>The account number:</p>
+<pre><code> public int accountNumber;
+</code></pre>
+</li>
+</ol>
+<p>Putting it all together, we have:</p>
+<pre><code>public class BankAccount {
+    public String ownerName;
+    public double balance;
+    public int accountNumber;
+}
+</code></pre>
+<p>This could be a complete class. It says that a <code>BankAccount</code> is a package of
+three values: a <code>double</code> named <code>balance</code>, a <code>String</code> named <code>ownerName</code>, and an
+<code>int</code> named <code>accountNumber</code>.</p>
+<p>To create a <code>BankAccount</code>, we say <code>new BankAccount()</code>. Now we can use our
+class:</p>
+<pre><code>BankAccount myAccount = new BankAccount();
+myAccount.ownerName = "Wilson Berkow";
+myAccount.accountNumber = 932478234; // seems legit
+myAccount.balance = 8000000000.0; // I have 8 biyon dollars
+</code></pre>
+<p>We can refer to the fields of <code>myAccount</code> using a period <code>.</code> (called the "dot
+operator"), and can use them and assign to them just like we would with
+variables.</p>
+<p>But classes are better than just for storing a lot of data in one variable.
+Just like primitive types have built-in operations (like <code>+</code> for addition and
+<code>/</code> for division), we can define operations for our classes.</p>
+<p>We call these operations <strong>methods</strong>. What methods might we want for a
+<code>BankAccount</code>?</p>
+<p>We'll want to deposit money...</p>
+<pre><code>public void deposit(double amountToDeposit) {
+    balance += amountToDeposit;
+}
+</code></pre>
+<p>Perhaps we'll want to be polite...</p>
+<pre><code>public void sayHello() {
+    System.out.println("Good morning " + ownerName + "! Welcome to the bank.");
+    // We can use + to combine Strings into a bigger String.
+}
+</code></pre>
+<p>Notice that from these methods, we can talk about our fields <code>balance</code> and
+<code>ownerName</code> by name.</p>
+<p>Let's see it all together...</p>
+<pre><code>public class BankAccount {
+    public String ownerName;
+    public double balance;
+    public int accountNumber;
+
+    public void deposit(double amountToDeposit) {
+        balance += amountToDeposit;
+    }
+
+    public void sayHello() {
+        // We can use + to combine values into a bigger String:
+        System.out.println("Good morning " + ownerName + "!");
+        System.out.println("You have " + balance + " dollars in the bank.");
+    }
+}
+</code></pre>
+<p>Example usage of a BankAccount object:</p>
+<pre><code>BankAccount fredsAccount = new BankAccount();
+fredsAccount.ownerName = "Fred Smith";
+fredsAccount.balance = 0.0;
+fredsAccount.accountNumber = 98537485; // or whatever
+
+fredsAccount.deposit(100.0);
+fredsAccount.sayHello();
+</code></pre>
+<p>This will display:</p>
+<pre><code>Good morning Fred Smith!
+You have 100 dollars in the bank.
+</code></pre>
+<h2>Finally, constructors</h2>
+<p>Phew. This has been a lot, but we have one more really important thing.</p>
+<p>In the above code, we've seen a lot of...</p>
+<pre><code>myAccount.&lt;field name&gt; = &lt;initial value&gt;;
+</code></pre>
+<p>It's annoying to have to explicitly initialize (give an initial value to) all
+our fields for all our accounts. To solve this, we have constructors.</p>
+<p>A constructor is a block of code that will run when an object is created.</p>
+<p>This is the general structure of a constructor:</p>
+<pre><code>public NameOfTheClass(...parameters...) {
+    ...code...
+}
+</code></pre>
+<p>Adding a constructor to our BankAccount class leaves us with:</p>
+<pre><code>public class BankAccount {
+    public String ownerName;
+    public double balance;
+    public int accountNumber;
+
+    public BankAccount(String name, double startingValue, int accountNum) {
+        ownerName = name;
+        balance = startingValue;
+        accountNumber = accountNum;
+    }
+
+    public void deposit(double amountToDeposit) {
+        balance += amountToDeposit;
+    }
+
+    public void sayHello() {
+        // We can use + to combine values into a bigger String:
+        System.out.println("Good morning " + ownerName + "!");
+        System.out.println("You have " + balance + " dollars in the bank.");
+    }
+}
+</code></pre>
+<p>And now, to create a <code>BankAccount</code> object, we can say:</p>
+<pre><code>BankAccount fredsAccount = new BankAccount("Fred Smith", 0.0, 98537485);
+
+// We've started fredsAccount with 0.0 dollars. Let's give him more:
+fredsAccount.deposit(100.0);
+fredsAccount.sayHello();
+</code></pre>
+<h2>Using this in our animations</h2>
+<p>Classes give us a lot of power. Look at the <code>Animation.java</code> and <code>Ball.java</code> files in
+the <code>src</code> directory (scroll up) for how classes can be used in our <code>Animation</code>s.</p>
+<p>Finally, a recommendation from Adris:</p>
+<h4>Tutorials</h4>
+<p>If you still feel unsure about anything that we went over in class, you should
+definitely look at some Java tutorials over the break. Going over a tutorial
+series will let you get a better understanding on the Java syntax which is
+essential for programming in the language.</p>
+<p>I suggest you go on YouTube and look up "Beginner Java Tutorial" and follow it
+through, at least until you get to methods and classes.</p>
+<h1><b id="summary-6">Summary #6</b> <a href="#README-top">↑ </a></h1>
+<p>2016-11-29</p>
+<p>Up till now, we've been writing graphical code which draws animations to the
+screen. The code we've been writing has used some libraries to do all this
+(libraries are code written as tools to make other programmers' work easier).</p>
+<p>Today we shifted course a bit and worked with vanilla Java. We begin with
+the standard "Hello, World!" program:</p>
+<pre><code>public class MyClass {
+    public static void main(String[] args) {
+        System.out.println("Hello, world!");
+    }
+}
+</code></pre>
+<p>This will print "Hello, world!" to the screen.</p>
+<p>This file declares a class <code>MyClass</code>, with no instance variables, and with
+one method: <code>main</code>. This method is different from the ones we've talked
+about: it is a <code>static</code> method.</p>
+<p>We introduced methods as operations that we define on our objects. If we create
+a <code>BankAccount</code>, we want a <code>deposit</code> method; when we work with the robot, the
+"drivetrain" of the robot (the part with the wheels and their motors) will be
+represented as an instance of class <code>Drivetrain</code>, and will have a drive method
+(called <code>tankDrive</code>).</p>
+<p>All these methods operate on an object of their class. To run them, you first
+have to make an object of that class. This makes sense: before depositing
+money, you have to make a bank account in which to deposit; before driving,
+you have to make a drivetrain.</p>
+<p>We will often, however, want to write methods that don't operate on objects of
+their class. For example, in our <code>BankAccount</code> we might want to calculate
+interest a lot, and instead of copy+pasting the code to do it, we'd like to put
+that code in a method and just say <code>calculateInterestOn(x, y, z)</code> whenever we
+need to. You don't need a bank account to calculate interest on a loan,
+thought&amp;emdash;it's just math. For this kind of case, we can make a <code>static</code> method.</p>
+<p><strong>I know that's a lot of text, but read it carefully. You can't tl;dr <code>static</code>.</strong></p>
+<p>So, our <code>main</code> method is <code>static</code>, and it can be run without creating an
+instance of <code>MyClass</code> <em>(terminology note: an "instance" of a class is an object
+constructed from that class; i.e.&nbsp;<code>new&nbsp;BankAccount()</code> is
+an instance of <code>BankAccount</code>)</em>. But what's the big deal?</p>
+<p><strong>Every executable Java program must have a <code>main</code> method, and the <code>main</code>
+method is where every Java programs starts.</strong></p>
+<p>Even in our graphical code from previous meetings, there was a <code>main</code> method
+at the very bottom, which began our code.</p>
+<p>Don't worry, if you don't understand <code>String[] args</code> yet. This is
+called an "array of strings"&amp;emdash;arrays are explained in the <a href="#summary-7">lesson
+7 summary</a> below.</p>
+<h3>While loops</h3>
+<p>A <strong>loop</strong> is a construct we can use to run a section of code
+many times.</p>
+<p>The simplest loop is a <code>while</code> loop. A <code>while</code> loop says "run this
+block of code repeatedly, until <some condition=""> becomes false."</some></p>
+<pre><code>while (&lt;condition&gt;) {
+    ... do things ...
+}
+</code></pre>
+<p>If we want to print out the numbers from 0 to 9, we can say:</p>
+<pre><code>int n = 0;
+while (n &lt; 10) {
+    System.out.println(n);
+    n += 1;
+}
+</code></pre>
+<p>You can tweak and run <a href="https://repl.it/EfYb">this example at repl.it</a>.</p>
+<h3>The Java SE 8 API Documentation</h3>
+<p>Java SE 8 is "Java Standard Edition 8"&amp;emdash;the latest version of Java.</p>
+<p>API is "Application Programming Interface". It is the interface that you,
+the programmer, use to interact with a piece of software.</p>
+<p>The <a href="https://docs.oracle.com/javase/8/docs/api/">Java SE 8 API Documentation</a>
+lists all the components built in to Java, including every single class. There
+is a link to a local copy of the API on your Desktop. Open it up and Ctrl+F to
+find a class (listed in the sidebar), click on the class name, and it will show
+you all you need to know about the class.</p>
+<p>Every class has a summary of its usage, then a list of its constructors,
+methods, and other things.</p>
+<p>The Java API docs (documentation) are written in pretty technical language, but
+if you're itching to do something we haven't yet discussed (e.g. the
+<code>ArrayList</code> class), check it out.</p>
+<h3>User input with <code>Scanner</code></h3>
+<p>We discussed the <code>Scanner</code> class in this lesson. A <code>Scanner</code> is used to read
+user input, or read text from a file. <strong>Scanner is not very important in the
+long-run.</strong></p>
+<p>First of all, we must import the <code>Scanner</code> class into our code. At the top of
+the file, before "public&nbsp;class...", add:</p>
+<pre><code>import java.util.Scanner;
+</code></pre>
+<p>To create a <code>Scanner</code> which will read from user input, we write:</p>
+<pre><code>Scanner myScanner = new Scanner(System.in);
+</code></pre>
+<p><code>System.in</code> represents user <strong>in</strong>put.</p>
+<p>Now we can do:</p>
+<pre><code>System.out.println("Enter your age:");
+int age = myScanner.nextInt();
+// myScanner.nextInt() will wait for the user to type some characters
+// and press Enter. If the user typed a number, it will return that
+// number. Otherwise, it will crash your code.
+
+System.out.println("Enter your first name:");
+String name = myScanner.next();
+// myScanner.next() will wait for the user to type characters and press
+// Enter, and will return the first word the user entered.
+</code></pre>
+<h1><b id="summary-7">Summary #7</b> <a href="#README-top">↑ </a></h1>
+<p>2016-12-01</p>
+<p><em><strong>Side note: an object whose class is <code>MyClass</code> is called an
+<em>instance</em> of <code>MyClass</code>.</strong> This is important terminology.</em></p>
+<p>In this lesson we talked more about loops, introduced arrays, and got some
+practice writing methods that use them.</p>
+<h3>The <code>for</code> loop</h3>
+<p>When using <code>while</code> loops, we often wanted to count how many iterations had
+been run in a variable. Much of our code looked like this:</p>
+<pre><code>int count = 0;
+while (&lt;condition&gt;) {
+    ... do stuff with the count variable...
+    count += 1;
+}
+</code></pre>
+<p>The <code>for</code> loop is a construct that allows us to abbreviate this as:</p>
+<pre><code>for (int count = 0; &lt;condition&gt;; count += 1) {
+    ... do stuff with the count variable...
+}
+</code></pre>
+<p>This is exactly the same as the first block of code.</p>
+<p>E.g., print the numbers from 0 to 9, inclusive:</p>
+<pre><code>for (int n = 0; n &lt; 10; n += 1) {
+    System.out.println(n);
+}
+</code></pre>
+<h3>Arrays</h3>
+<p>An array is a collection of items <strong>all of the same type.</strong></p>
+<p>In general, the type of an array is <code>&lt;itemtype&gt;[]</code>, and an array is created
+with the expression <code>new&nbsp;&lt;itemtype&gt;[<length>]</length></code>, where
+<code>&lt;itemtype&gt;</code> is the type of the items that will be in the array, and <code>&lt;length&gt;</code>
+is the number of items it should hold.</p>
+<p>For example:</p>
+<pre><code>int[] stuyGrades = new int[10]; // an array of 10 ints
+</code></pre>
+<p><code>stuyGrades</code> is an array of length 10, in which each item is an <code>int</code>. As the
+default value for an <code>int</code> is 0, all of its values are initially <code>0</code>.</p>
+<p>Terminology note: "item" = "element" = "member" of an array</p>
+<h4>Access</h4>
+<p>To access an item in <code>stuyGrades</code>, we write <code>stuyGrades[&lt;index&gt;]</code> for some
+expression <code>&lt;index&gt;</code>.</p>
+<p>Similarly, to set an item in <code>stuyGrades</code> to some value, we write:</p>
+<pre><code>stuyGrades[&lt;index&gt;] = &lt;value&gt;;
+</code></pre>
+<p>For example:</p>
+<pre><code>stuyGrades[0] = 73;
+stuyGrades[1] = 88;
+int firstGrade = stuyGrades[0]; // firstGrade is 73
+System.out.println(stuyGrades[1]); // displays 88
+</code></pre>
+<p>Note that the <strong>indices start at zero</strong>, not at one. In software, we label
+sequences of things starting from 0 (it happens to be very convenient).</p>
+<p><strong>Warning:</strong> if your code tries to access an index that is <em>out of bounds</em>,
+it will crash. For example:</p>
+<pre><code>stuyGrades[42] // crashes!
+stuyGrades[10] // crashes!
+stuyGrades[-3] // crashes!
+stuyGrades[x] // works only when x is non-negative and less than 10
+</code></pre>
+<p>Notice that 10 is out of bounds, (recall that the length of <code>stuyGrades</code> is
+10).  Remember: the index of the first element is 0, so the index of the last
+element is 9, in this case. In general, the index of the last element is one
+less than the array's length.</p>
+<h4>Length</h4>
+<p>We can get the <em>length</em> of an array (the number of items it can hold) with the
+<code>length</code> property. E.g.:</p>
+<pre><code>int howManyGrades = stuyGrades.length; // howManyGrades is 10
+</code></pre>
+<h4>Iterating over an array</h4>
+<p>We can put together what we've learned above to "iterate" over an array.
+That is, to execute a loop which runs once for every element in an array.</p>
+<p>If we want to print out every element of <code>stuyGrades</code>, we can write:</p>
+<pre><code>for (int i = 0; i &lt; stuyGrades.length; i += 1) {
+    // i is short for "index"
+    System.out.println(stuyGrades[i]);
+}
+</code></pre>
+<h4>Writing some methods</h4>
+<p>Toward the end of the meeting, we started writing methods for
+doing math and operating on arrays. See the <code>Stats.java</code> file in
+<code>src</code> for what we exactly wrote.</p>
+<p>We ended with a discussion of how to find the minimum value in
+an array, and got to a good idea. This is where we'll resume on Tuesday.</p>
+</article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</body></html>
