@@ -14,6 +14,7 @@ public class Stats {
 
     public static int minimum(int[] dataset) {
         // ... we'll get to this ...
+        return 0;
     }
 
     public static double triple(double input) {
