@@ -1,10 +1,5 @@
-// Started in Lesson 7 (Dec 1)
+// Used in lessons 7, 8 and 9
 public class Stats {
-
-
-
-
-
     public static void main(String[] args) {
         double foo = 0.5;
         double bar = f(foo);
@@ -17,10 +12,10 @@ public class Stats {
         values[3] = -2;
         values[4] = 12;
         int smallest = minimum(values);
-        
-        System.out.println(   f(13)  );
+
+        System.out.println(f(13));
     }
-    
+
     public static int minimum(int[] dataset) {
         int minSoFar = dataset[0];
         for (int i = 1; i < dataset.length; i++) {
@@ -31,7 +26,8 @@ public class Stats {
         }
         return minSoFar;
     }
-    
+
+    // An example method, like the algebra function 'f(x) = 2x'
     public static double f(double x) {
         return 2 * x;
     }

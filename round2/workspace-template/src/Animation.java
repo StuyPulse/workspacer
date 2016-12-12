@@ -1,11 +1,3 @@
-
-
-
-
-
-
-//That was stupid.
-
 import gui.GuiSimple;
 
 public class Animation extends GuiSimple {
@@ -31,7 +23,12 @@ public class Animation extends GuiSimple {
 
     // main(). You'll learn what this means later
     public static void main(String[] args) {
-        begin(new Animation());
+        double foo = 0.5;
+        int[] values = new int[5];
+        Animation balls = new Animation();
+        while (true) {
+            balls.draw();
+        }
     }
 }
 

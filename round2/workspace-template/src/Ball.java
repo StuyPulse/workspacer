@@ -1,17 +1,13 @@
-
-
-
-
-
-
-
-
-
-
-
 import gui.Screen;
 
+
+
+
+
+
+
 public class Ball {
+
     public double posX;
     public double posY;
     public double velX;
@@ -28,7 +24,7 @@ public class Ball {
     public void render(Screen serena) {
         serena.circle(posX, posY, 10.0);
     }
-    
+
     public void update() {
         // "Bounce" when we reach the bottom of the screen
         if (posY > 400) {
