@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Mostly untested in full, as of 2017-11-19
 
 machinenum=$1

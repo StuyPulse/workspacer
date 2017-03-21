@@ -1,4 +1,6 @@
-rm -rf ~/client2/.ssh
+#!/bin/bash
+
+rm -rf ~/client1/.ssh
 mkdir ~/client2/.ssh
 # Make rsa key pair with no password (-N "" sets password to empty string)
 ssh-keygen -t rsa -f ~/client2/.ssh/id_rsa -N ""

@@ -12,8 +12,9 @@ BIN = $(PROJECT_ROOT)/build
 
 JAVAC = javac
 CLASSPATH = $(BIN):$(EDUGUI):$(JAVAFX)
-JAVA_FLAGS = -g -d $(BIN) -cp $(CLASSPATH)
-COMPILE = $(JAVAC) $(JAVA_FLAGS)
+COMPILE = $(JAVAC) -g -d $(BIN) -cp $(CLASSPATH)
+
+LIBRARY_PATH = lib/opencv-3.0.0/build/lib
 
 .DEFAULT_GOAL := run
 
@@ -21,7 +22,7 @@ COMPILE = $(JAVAC) $(JAVA_FLAGS)
 class=Animation
 
 all: clean init-bin
-	find $(SRC) -name '*.java' -print | xargs $(COMPILE)
+	$(COMPILE) src/$(class).java
 
 clean:
 	rm -rf $(BIN)
@@ -30,4 +31,4 @@ init-bin:
 	mkdir $(BIN)
 
 run: all
-	java -cp $(CLASSPATH) $(class)
+	java -cp $(CLASSPATH) -Djava.library.path=$(LIBRARY_PATH)  $(class)

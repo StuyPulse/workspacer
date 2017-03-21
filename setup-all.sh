@@ -1,3 +1,5 @@
+#!/bin/bash
+
 for i in {0..32}; do
     if [[ $i -lt 10 ]]; then
         comp=149.89.161.10$i
@@ -13,6 +15,7 @@ for i in {0..32}; do
         # Create the directory if it doesn't exist
         scp -r ~/workspace-libs ${comp}:/var/tmp/robo-libs
     fi
+    ssh ${comp} "cd /var/tmp/robo-libs && ln -s /var/tmp/opencv-3.0.0 opencv-3.0.0"
     ssh ${comp} "chmod -R go+r /var/tmp/robo/.ssh && cp /var/tmp/robo/setmeup.sh /var/tmp/setmeup"
 
     echo -e "\nCompleted computer $i of 32\n"

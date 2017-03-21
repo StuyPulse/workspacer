@@ -1,3 +1,5 @@
+#!/bin/bash
+
 apidir="/home/students/2019/robotics/Downloads/docs/api"
 
 for i in {32..0}; do

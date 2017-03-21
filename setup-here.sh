@@ -1,3 +1,5 @@
+#!/bin/bash
+
 comp=localhost
 ssh ${comp} "rm -rf /var/tmp/robo; rm -rf /var/tmp/robo-files"
 scp -r ~/client2 ${comp}:/var/tmp/robo
